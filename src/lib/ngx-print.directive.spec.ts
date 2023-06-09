@@ -34,7 +34,7 @@ import { NgxPrintDirective }        from './ngx-print.directive';
       </tr>
     </table>
   </div>
-  <button printSectionId="print-section" ngxPrint></button>
+  <button printSectionId="print-section" ngxPrint bodyClass="theme-dark"></button>
   `
 })
 class TestNgxPrintComponent {
@@ -103,10 +103,17 @@ describe('NgxPrintDirective', () => {
   // });
 
   it(`should popup a new window`, ()=> {
-    spyOn(window, 'open');
+    spyOn(window, 'open').and.callThrough();
     // simulate click
     buttonEl.triggerEventHandler('click', {});
     expect(window.open).toHaveBeenCalled();
+  });
+
+  it(`should apply class list to body element in new window`, ()=> {
+    const windowOpenSpy = spyOn(window, 'open').and.callThrough();
+    // simulate click
+    buttonEl.triggerEventHandler('click', {});
+    expect(windowOpenSpy.calls.mostRecent().returnValue.document.body.classList.contains('theme-dark')).toBeTrue();
   });
 
 });
