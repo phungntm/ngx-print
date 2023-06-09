@@ -151,6 +151,40 @@ Here some simple styles were added to every `h1` & `h2` tags within the `div` wh
 	ngxPrint>print</button>
 
 ```
+
+- Some print operations open a second dialog, and automatically closing the popup window happens before the second dialog opens. Set `closeWindow` to false to handle print operations that open a second dialog, like "Microsoft Print to PDF", or "Print using system dialog...":
+
+```html
+
+<div  id="print-section">
+
+<!-- ... -->
+
+</div>
+
+<button
+	[closeWindow]="false"
+	printSectionId="print-section"
+	ngxPrint>print</button>
+
+```
+
+- Set `bodyClass` to whatever class values are needed for some of your css rules that expect an ancestor to have a certain class. For example, a theme selector:
+
+```html
+
+<div  id="print-section">
+
+<!-- ... -->
+
+</div>
+
+<button
+	[bodyClass]="theme-dark"
+	printSectionId="print-section"
+	ngxPrint>print</button>
+
+```
 ## Contributors :1st_place_medal: 
 
 Huge thanks to: [deeplotia](https://github.com/deeplotia) , [Ben L](https://github.com/broem) , [Gavyn McKenzie](https://github.com/gavmck) , [silenceway](https://github.com/silenceway), [Muhammad Ahsan Ayaz](https://github.com/AhsanAyaz) and to all  `ngx-print` users 
