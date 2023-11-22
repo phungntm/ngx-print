@@ -43,6 +43,18 @@ export class NgxPrintDirective {
   @Input() printDelay: number = 0;
 
   /**
+   * Whether to close the window after print() returns.
+   *
+   */
+  @Input() closeWindow: boolean = true;
+
+  /**
+   * Class attribute to apply to the body element.
+   *
+   */
+  @Input() bodyClass: string = '';
+
+  /**
    *
    *
    * @memberof NgxPrintDirective
@@ -150,7 +162,7 @@ public returnStyleValues() {
   /**
    * @description Retrieves the html contents of the print section id.
    * Updates the html elements to default their form values to the current form values
-   * 
+   *
    * @returns {string | null} html section to be printed
    *
    */
@@ -197,22 +209,22 @@ public returnStyleValues() {
           ${styles}
           ${links}
         </head>
-        <body>
+        <body ${this.bodyClass ? `class="${this.bodyClass}"` : ''}>
           ${printContents}
           <script defer>
             function triggerPrint(event) {
               window.removeEventListener('load', triggerPrint, false);
-              ${this.previewOnly ? '' : `setTimeout(function() {
+              ${this.previewOnly || !this.closeWindow ? '' : `setTimeout(function() {
                 closeWindow(window.print());
               }, ${this.printDelay});`}
             }
             function closeWindow(){
-                window.close();
+              window.close();
             }
             window.addEventListener('load', triggerPrint, false);
           </script>
         </body>
       </html>`);
-    popupWin.document.close();
+      popupWin.document.close();
   }
 }
