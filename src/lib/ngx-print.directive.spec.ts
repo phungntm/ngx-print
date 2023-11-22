@@ -57,7 +57,8 @@ describe('NgxPrintDirective', () => {
 
     // Configure a NgModule-like decorator metadata
     TestBed.configureTestingModule({
-      declarations: [TestNgxPrintComponent, NgxPrintDirective]
+      declarations: [TestNgxPrintComponent],
+      imports: [NgxPrintDirective]
     });
 
     // Create a fixture object (that is going to allows us to create an instance of that component)
@@ -77,30 +78,41 @@ describe('NgxPrintDirective', () => {
     expect(directive).toBeTruthy();
   });
 
-  // it('should test the @Input printStyle', () => {
-  //   const directive = new NgxPrintDirective();
-  //   directive.printStyle = styleSheet;
-  //   for (var key in directive.printStyle) {
-  //     if (directive.printStyle.hasOwnProperty(key)) {
-  //       directive._printStyle.push((key + JSON.stringify(directive.printStyle[key])).replace(/['"]+/g, ''));
-  //     }
-  //   }
-  //   directive.returnStyleValues();
+  it('should test the @Input printStyle', () => {
+    const directive = new NgxPrintDirective();
 
-  //   expect(directive.returnStyleValues).toHaveBeenCalled();
-  // });
+    // Define styleSheet before using it
+    const styleSheet = {/* Define your styles here */ };
 
-  // it('should returns a string from array of objects', () => {
-  //   const directive = new NgxPrintDirective();
-  //   directive._printStyle = [
-  //     "h2{border:solid 1px}",
-  //     "h1{color:red,border:1px solid}"
-  //   ];
-  //   // let returnedString = directive.returnStyleValues();
+    directive.printStyle = styleSheet;
 
-  //   // immediately invoked arrow function, else you can uncomment `returnedString` and use it instead
-  //   expect((() => {return directive.returnStyleValues()})()).toEqual('h2{border:solid 1px} h1{color:red,border:1px solid}');
-  // });
+    // Iterate through printStyle and push values to _printStyle
+    for (var key in directive.printStyle) {
+      if (directive.printStyle.hasOwnProperty(key)) {
+        directive._printStyle.push((key + JSON.stringify(directive.printStyle[key])).replace(/['"]+/g, ''));
+      }
+    }
+
+    // Create a spy on the instance's method
+    spyOn(directive, 'returnStyleValues').and.callThrough();
+
+    // Call the function before checking if it has been called
+    directive.returnStyleValues();
+
+    // Check if returnStyleValues has been called
+    expect(directive.returnStyleValues).toHaveBeenCalled();
+  });
+
+
+  it('should returns a string from array of objects', () => {
+    const directive = new NgxPrintDirective();
+    directive._printStyle = [
+      "h2{border:solid 1px}",
+      "h1{color:red,border:1px solid}"
+    ];
+
+    expect((() => { return directive.returnStyleValues() })()).toEqual('<style> h2{border:solid 1px} h1{color:red;border:1px solid} </style>');
+  });
 
   it(`should popup a new window`, () => {
     spyOn(window, 'open').and.callThrough();
