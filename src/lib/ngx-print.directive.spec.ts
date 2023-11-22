@@ -87,7 +87,7 @@ describe('NgxPrintDirective', () => {
     directive.printStyle = styleSheet;
 
     // Iterate through printStyle and push values to _printStyle
-    for (let key in directive.printStyle) {
+    for (const key in directive.printStyle) {
       if (directive.printStyle.hasOwnProperty(key)) {
         directive._printStyle.push((key + JSON.stringify(directive.printStyle[key])).replace(/['"]+/g, ''));
       }
