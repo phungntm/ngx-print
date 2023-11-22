@@ -1,8 +1,8 @@
-import {Component, DebugElement}    from "@angular/core";
-import {TestBed, ComponentFixture}  from '@angular/core/testing';
-import {By}                         from "@angular/platform-browser";
+import { Component, DebugElement } from "@angular/core";
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from "@angular/platform-browser";
 
-import { NgxPrintDirective }        from './ngx-print.directive';
+import { NgxPrintDirective } from './ngx-print.directive';
 
 @Component({
   template: `
@@ -42,16 +42,16 @@ class TestNgxPrintComponent {
 
 describe('NgxPrintDirective', () => {
 
-  let buttonEl:   DebugElement;
-  let component:  TestNgxPrintComponent;
-  let fixture:    ComponentFixture<TestNgxPrintComponent>;
+  let buttonEl: DebugElement;
+  let component: TestNgxPrintComponent;
+  let fixture: ComponentFixture<TestNgxPrintComponent>;
 
   // To change this later, so it'll depend on TestNgxPrintComponent
-  let styleSheet: {[key: string]: {[key: string]: string}}
-                   = {
-                     'h2' : {'border': 'solid 1px'},
-                     'h1' : {'color': 'red', 'border': '1px solid'}
-                    };
+  let styleSheet: { [key: string]: { [key: string]: string } }
+    = {
+    'h2': { 'border': 'solid 1px' },
+    'h1': { 'color': 'red', 'border': '1px solid' }
+  };
 
   beforeEach(() => {
 
@@ -67,7 +67,7 @@ describe('NgxPrintDirective', () => {
     component = fixture.componentInstance;
 
     // Get the button element (on which we tag the directive) to simulate clicks on it
-    buttonEl =  fixture.debugElement.query(By.directive(NgxPrintDirective));
+    buttonEl = fixture.debugElement.query(By.directive(NgxPrintDirective));
 
     fixture.detectChanges();
   });
@@ -102,14 +102,14 @@ describe('NgxPrintDirective', () => {
   //   expect((() => {return directive.returnStyleValues()})()).toEqual('h2{border:solid 1px} h1{color:red,border:1px solid}');
   // });
 
-  it(`should popup a new window`, ()=> {
+  it(`should popup a new window`, () => {
     spyOn(window, 'open').and.callThrough();
     // simulate click
     buttonEl.triggerEventHandler('click', {});
     expect(window.open).toHaveBeenCalled();
   });
 
-  it(`should apply class list to body element in new window`, ()=> {
+  it(`should apply class list to body element in new window`, () => {
     const windowOpenSpy = spyOn(window, 'open').and.callThrough();
     // simulate click
     buttonEl.triggerEventHandler('click', {});
