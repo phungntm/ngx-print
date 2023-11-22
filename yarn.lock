@@ -122,7 +122,7 @@
     ora "5.4.1"
     rxjs "7.8.1"
 
-"@angular/cli@~17.0.3":
+"@angular/cli@^17.0.3":
   version "17.0.3"
   resolved "https://registry.npmjs.org/@angular/cli/-/cli-17.0.3.tgz"
   integrity sha512-pRGXms87aEqmB4yPdcPI/VM7JegjDcBIeLadms0wrBkoyQiv+jL5LesxODhid6ujXZOj1xqMCYbCnX7HY+mLcQ==
@@ -146,7 +146,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@17.0.4":
+"@angular/common@^17.0.4", "@angular/common@17.0.4":
   version "17.0.4"
   resolved "https://registry.npmjs.org/@angular/common/-/common-17.0.4.tgz"
   integrity sha512-/y38PbuiaWOuOmP5ZELTlJSjZGijc6Nq2XQloT5pKsaH935prxPjyWazwlY6cUnJMQgSRU644/ULosDJec7Zxw==
@@ -167,14 +167,14 @@
     tslib "^2.3.0"
     yargs "^17.2.1"
 
-"@angular/compiler@17.0.4":
+"@angular/compiler@^17.0.4", "@angular/compiler@17.0.4":
   version "17.0.4"
   resolved "https://registry.npmjs.org/@angular/compiler/-/compiler-17.0.4.tgz"
   integrity sha512-OweJui9EWCa1ZcZjkJHS5z1gqICqyryR1Gdmyr8vIa6HD8wU/5BaeBJPCDgYgt+qJkvcT/sPxgZQsc2pVeUwbQ==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@17.0.4":
+"@angular/core@^17.0.4", "@angular/core@17.0.4":
   version "17.0.4"
   resolved "https://registry.npmjs.org/@angular/core/-/core-17.0.4.tgz"
   integrity sha512-zk+z5sYPZd87pLxECx27quB5FvSmoi9PjJlcSlaBwwqaGnh/tPJI14u3q1dRY/CoZgP9egEiwc428+DzvOzJew==
