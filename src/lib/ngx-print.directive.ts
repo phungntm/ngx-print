@@ -1,21 +1,12 @@
 import { Directive, HostListener, Input } from '@angular/core';
 import { PrintBase } from './ngx-print.base';
-import { IPrintOptions } from './iprint-options';
+import { PrintOptions } from './print-options';
 @Directive({
   selector: "button[ngxPrint]",
   standalone: true
 })
 export class NgxPrintDirective extends PrintBase {
-  private printOptions: IPrintOptions = {
-    printSectionId: null,
-    printTitle: null,
-    useExistingCss: false,
-    bodyClass: '',
-    previewOnly: false,
-    closeWindow: true,
-    printDelay: 0,
-  };
-  
+  private printOptions = new PrintOptions();
   /**
    * Prevents the print dialog from opening on the window
    *

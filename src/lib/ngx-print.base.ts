@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IPrintOptions } from "./iprint-options";
+import { PrintOptions } from "./print-options";
 
 @Injectable({
     providedIn: 'root'
@@ -89,7 +89,7 @@ export class PrintBase {
         return this._styleSheetFile;
     }
 
-    public print(printOptions: IPrintOptions): void {
+    public print(printOptions: PrintOptions): void {
 
         let printContents, popupWin, styles = '', links = '';
         const baseTag = this.getElementTag('base');
