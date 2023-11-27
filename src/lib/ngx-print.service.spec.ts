@@ -65,11 +65,76 @@ describe('NgxPrintService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should print with custom options', () => {
+  it('should print', () => {
     spyOn(service, 'print');
 
     const customPrintOptions: PrintOptions = new PrintOptions({
       printSectionId: 'print-section'
+    });
+
+    component.printMe(customPrintOptions);
+
+    expect(service.print).toHaveBeenCalledWith(customPrintOptions);
+  });
+
+  it('should print with title', () => {
+    spyOn(service, 'print');
+
+    const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'print-section',
+      printTitle: "Test Title"
+    });
+
+    component.printMe(customPrintOptions);
+
+    expect(service.print).toHaveBeenCalledWith(customPrintOptions);
+  });
+
+  it('should print with existing css', () => {
+    spyOn(service, 'print');
+
+    const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'print-section',
+      useExistingCss: true
+    });
+
+    component.printMe(customPrintOptions);
+
+    expect(service.print).toHaveBeenCalledWith(customPrintOptions);
+  });
+
+  it('should print with delay', () => {
+    spyOn(service, 'print');
+
+    const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'print-section',
+      printDelay: 2000
+    });
+
+    component.printMe(customPrintOptions);
+
+    expect(service.print).toHaveBeenCalledWith(customPrintOptions);
+  });
+
+  it('should print with previewOnly', () => {
+    spyOn(service, 'print');
+
+    const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'print-section',
+      previewOnly: true
+    });
+
+    component.printMe(customPrintOptions);
+
+    expect(service.print).toHaveBeenCalledWith(customPrintOptions);
+  });
+
+  it('should not close', () => {
+    spyOn(service, 'print');
+
+    const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'print-section',
+      closeWindow: false
     });
 
     component.printMe(customPrintOptions);
