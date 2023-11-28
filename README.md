@@ -8,6 +8,7 @@ This directive makes printing your HTML sections smooth and easy in your Angular
 | ------------ | ------------ |
 | 1.2.1        | 7.0.0 - 14.1.0   |
 | 1.3.x        | 15.0.0       |
+| 1.4.x		   | 17.0.0		  |
 ## Setup
 
  **1-** In your root application folder run:
@@ -185,9 +186,50 @@ Here some simple styles were added to every `h1` & `h2` tags within the `div` wh
 	ngxPrint>print</button>
 
 ```
+## Using NgxPrint as a service
+Inject the NgxPrintService in the constructor of your component or service:
+
+```typescript
+constructor(private printService: NgxPrintService) { }
+```
+
+### Printing a Section
+```typescript
+import { PrintOptions } from './path-to-your/print-options.model';
+
+printMe() {
+  const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'print-section',
+      // Add any other print options as needed
+  });
+  this.printService.print(customPrintOptions)
+}
+```
+
+### Print Options Object
+The print options object allows you to specify how the print job should be handled. All of which have default values that you can optionally override, although printSectionId is required. It contains the following properties:
+```typescript
+  printSectionId: string = null;
+  printTitle: string = null;
+  useExistingCss: boolean = false;
+  bodyClass: string = '';
+  previewOnly: boolean = false;
+  closeWindow: boolean = true;
+  printDelay: number = 0;
+```
+
+### Setting PrintStyles or StyleSheets
+```typescript
+// Optional property for css as a key-value pair
+this.printService.printStyle = styleSheet;
+
+// Optional property for a css file location
+this.printService.styleSheetFile = fileLocation;
+```
+
 ## Contributors :1st_place_medal: 
 
-Huge thanks to: [deeplotia](https://github.com/deeplotia) , [Ben L](https://github.com/broem) , [Gavyn McKenzie](https://github.com/gavmck) , [silenceway](https://github.com/silenceway), [Muhammad Ahsan Ayaz](https://github.com/AhsanAyaz) and to all  `ngx-print` users 
+Huge thanks to: [deeplotia](https://github.com/deeplotia) , [Ben L](https://github.com/broem) , [Gavyn McKenzie](https://github.com/gavmck) , [silenceway](https://github.com/silenceway), [Muhammad Ahsan Ayaz](https://github.com/AhsanAyaz), [Core121](https://github.com/Core121) and to all  `ngx-print` users 
 
 ## Donation
 
