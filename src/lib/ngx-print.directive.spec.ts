@@ -78,34 +78,27 @@ describe('NgxPrintDirective', () => {
     expect(directive).toBeTruthy();
   });
 
-  // it('should test the @Input printStyle', () => {
-  //   const directive = new NgxPrintDirective();
+  it('should test the @Input printStyle', () => {
+    const directive = new NgxPrintDirective();
 
-  //   // Define styleSheet before using it
-  //   const styleSheet = {/* Define your styles here */ };
+    // Create a spy on the instance's method
+    spyOn(directive, 'returnStyleValues').and.callThrough();
 
-  //   directive.printStyle = styleSheet;
+    // Call the function before checking if it has been called
+    directive.returnStyleValues();
 
-  //   // Create a spy on the instance's method
-  //   spyOn(directive, 'returnStyleValues').and.callThrough();
-
-  //   // Call the function before checking if it has been called
-  //   directive.returnStyleValues();
-
-  //   // Check if returnStyleValues has been called
-  //   expect(directive.returnStyleValues).toHaveBeenCalled();
-  // });
+    // Check if returnStyleValues has been called
+    expect(directive.returnStyleValues).toHaveBeenCalled();
+  });
 
 
-  // it('should returns a string from array of objects', () => {
-  //   const directive = new NgxPrintDirective();
-  //   directive.printStyle = [
-  //     "h2{border:solid 1px}",
-  //     "h1{color:red,border:1px solid}"
-  //   ];
+  it('should returns a string from array of objects', () => {
+    const directive = new NgxPrintDirective();
+    directive.printStyle = styleSheet;
 
-  //   expect((() => { return directive.returnStyleValues() })()).toEqual('<style> h2{border:solid 1px} h1{color:red;border:1px solid} </style>');
-  // });
+    // Ensure the print styles are correctly formatted in the document
+    expect(directive.returnStyleValues()).toEqual('<style> h2{border:solid 1px} h1{color:red;border:1px solid} </style>');
+  });
 
   it(`should popup a new window`, () => {
     spyOn(window, 'open').and.callThrough();
