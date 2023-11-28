@@ -13,7 +13,7 @@ export class NgxPrintDirective extends PrintBase {
    * @memberof NgxPrintDirective
    */
   @Input() set previewOnly(value: boolean) {
-    this.printOptions = {...this.printOptions, previewOnly: value};
+    this.printOptions = { ...this.printOptions, previewOnly: value };
   }
 
   /**
@@ -22,7 +22,7 @@ export class NgxPrintDirective extends PrintBase {
    * @memberof NgxPrintDirective
    */
   @Input() set printSectionId(value: string) {
-    this.printOptions = {...this.printOptions, printSectionId: value};
+    this.printOptions = { ...this.printOptions, printSectionId: value };
   }
 
   /**
@@ -31,7 +31,7 @@ export class NgxPrintDirective extends PrintBase {
    * @memberof NgxPrintDirective
    */
   @Input() set printTitle(value: string) {
-    this.printOptions = {...this.printOptions, printSectionId: value};
+    this.printOptions = { ...this.printOptions, printSectionId: value };
   }
 
   /**
@@ -40,7 +40,7 @@ export class NgxPrintDirective extends PrintBase {
    * @memberof NgxPrintDirective
    */
   @Input() set useExistingCss(value: boolean) {
-    this.printOptions = {...this.printOptions, useExistingCss: value};
+    this.printOptions = { ...this.printOptions, useExistingCss: value };
   }
 
   /**
@@ -49,7 +49,7 @@ export class NgxPrintDirective extends PrintBase {
    * @memberof NgxPrintDirective
    */
   @Input() set printDelay(value: number) {
-    this.printOptions = {...this.printOptions, printDelay: value};
+    this.printOptions = { ...this.printOptions, printDelay: value };
   }
 
   /**
@@ -57,7 +57,7 @@ export class NgxPrintDirective extends PrintBase {
    *
    */
   @Input() set closeWindow(value: boolean) {
-    this.printOptions = {...this.printOptions, closeWindow: value};
+    this.printOptions = { ...this.printOptions, closeWindow: value };
   }
 
   /**
@@ -65,7 +65,7 @@ export class NgxPrintDirective extends PrintBase {
    *
    */
   @Input() set bodyClass(value: string) {
-    this.printOptions = {...this.printOptions, bodyClass: value};
+    this.printOptions = { ...this.printOptions, bodyClass: value };
   }
 
   /**
@@ -75,7 +75,7 @@ export class NgxPrintDirective extends PrintBase {
    */
   @Input()
   set printStyle(values: { [key: string]: { [key: string]: string } }) {
-    this.setPrintStyle(values);
+    super.setPrintStyle(values);
   }
 
 
