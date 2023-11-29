@@ -57,7 +57,8 @@ describe('NgxPrintDirective', () => {
 
     // Configure a NgModule-like decorator metadata
     TestBed.configureTestingModule({
-      declarations: [TestNgxPrintComponent, NgxPrintDirective]
+      declarations: [TestNgxPrintComponent],
+      imports: [NgxPrintDirective]
     });
 
     // Create a fixture object (that is going to allows us to create an instance of that component)
