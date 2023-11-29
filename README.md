@@ -9,7 +9,7 @@ This directive makes printing your HTML sections smooth and easy in your Angular
 | 1.2.1        | 7.0.0 - 14.1.0   |
 | 1.3.x        | 15.0.0       |
 | 1.4.x        | 16.0.0       |
-| 1.5.x		   | 17.0.0		  |
+| 1.5.x		     | 17.0.0		    |
 ## Setup
 
  **1-** In your root application folder run:
