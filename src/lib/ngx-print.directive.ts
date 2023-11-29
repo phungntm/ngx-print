@@ -63,24 +63,24 @@ export class NgxPrintDirective {
   set printStyle(values: { [key: string]: { [key: string]: string } }) {
     for (let key in values) {
       if (values.hasOwnProperty(key)) {
-      this._printStyle.push((key + JSON.stringify(values[key])).replace(/['"]+/g, ''));
+        this._printStyle.push((key + JSON.stringify(values[key])).replace(/['"]+/g, ''));
       }
     }
     this.returnStyleValues();
   }
 
-/**
- *
- *
- * @returns the string that create the stylesheet which will be injected
- * later within <style></style> tag.
- *
- * -join/replace to transform an array objects to css-styled string
- *
- * @memberof NgxPrintDirective
- */
-public returnStyleValues() {
-  return `<style> ${this._printStyle.join(' ').replace(/,/g,';')} </style>`;
+  /**
+   *
+   *
+   * @returns the string that create the stylesheet which will be injected
+   * later within <style></style> tag.
+   *
+   * -join/replace to transform an array objects to css-styled string
+   *
+   * @memberof NgxPrintDirective
+   */
+  public returnStyleValues() {
+    return `<style> ${this._printStyle.join(' ').replace(/,/g, ';')} </style>`;
   }
 
   /**
@@ -98,7 +98,7 @@ public returnStyleValues() {
    */
   @Input()
   set styleSheetFile(cssList: string) {
-    let linkTagFn = function(cssFileName) {
+    let linkTagFn = function (cssFileName) {
       return `<link rel="stylesheet" type="text/css" href="${cssFileName}">`;
     }
     if (cssList.indexOf(',') !== -1) {
@@ -128,14 +128,14 @@ public returnStyleValues() {
     return html.join('\r\n');
   }
 
-    /**
-   *
-   * @description When printing, the default option of form elements are printed.
-   * Here we update what that default is to print the current values.
-   *
-   * @param elements the html element collection to save defaults to
-   *
-   */
+  /**
+ *
+ * @description When printing, the default option of form elements are printed.
+ * Here we update what that default is to print the current values.
+ *
+ * @param elements the html element collection to save defaults to
+ *
+ */
   private updateInputDefaults(elements: HTMLCollectionOf<HTMLInputElement>): void {
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
@@ -191,7 +191,7 @@ public returnStyleValues() {
     let printContents, popupWin, styles = '', links = '';
     const baseTag = this.getElementTag('base');
 
-    if(this.useExistingCss) {
+    if (this.useExistingCss) {
       styles = this.getElementTag('style');
       links = this.getElementTag('link');
     }
@@ -225,6 +225,6 @@ public returnStyleValues() {
           </script>
         </body>
       </html>`);
-      popupWin.document.close();
+    popupWin.document.close();
   }
 }

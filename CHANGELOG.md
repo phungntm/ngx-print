@@ -1,3 +1,6 @@
+# 1.4.0 (2023-11-29)
+*  Now supports Angular 16
+
 # 1.3.0 (2022-12-20)
 ### New features
 *  Supports previewOnly tag, allowing for the print preview to show without the print dialog

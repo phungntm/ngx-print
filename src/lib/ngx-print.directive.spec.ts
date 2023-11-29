@@ -1,8 +1,8 @@
-import {Component, DebugElement}    from "@angular/core";
-import {TestBed, ComponentFixture}  from '@angular/core/testing';
-import {By}                         from "@angular/platform-browser";
+import { Component, DebugElement } from "@angular/core";
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from "@angular/platform-browser";
 
-import { NgxPrintDirective }        from './ngx-print.directive';
+import { NgxPrintDirective } from './ngx-print.directive';
 
 @Component({
   template: `
@@ -42,22 +42,23 @@ class TestNgxPrintComponent {
 
 describe('NgxPrintDirective', () => {
 
-  let buttonEl:   DebugElement;
-  let component:  TestNgxPrintComponent;
-  let fixture:    ComponentFixture<TestNgxPrintComponent>;
+  let buttonEl: DebugElement;
+  let component: TestNgxPrintComponent;
+  let fixture: ComponentFixture<TestNgxPrintComponent>;
 
   // To change this later, so it'll depend on TestNgxPrintComponent
-  let styleSheet: {[key: string]: {[key: string]: string}}
-                   = {
-                     'h2' : {'border': 'solid 1px'},
-                     'h1' : {'color': 'red', 'border': '1px solid'}
-                    };
+  let styleSheet: { [key: string]: { [key: string]: string } }
+    = {
+    'h2': { 'border': 'solid 1px' },
+    'h1': { 'color': 'red', 'border': '1px solid' }
+  };
 
   beforeEach(() => {
 
     // Configure a NgModule-like decorator metadata
     TestBed.configureTestingModule({
-      declarations: [TestNgxPrintComponent, NgxPrintDirective]
+      declarations: [TestNgxPrintComponent],
+      imports: [NgxPrintDirective]
     });
 
     // Create a fixture object (that is going to allows us to create an instance of that component)
@@ -67,7 +68,7 @@ describe('NgxPrintDirective', () => {
     component = fixture.componentInstance;
 
     // Get the button element (on which we tag the directive) to simulate clicks on it
-    buttonEl =  fixture.debugElement.query(By.directive(NgxPrintDirective));
+    buttonEl = fixture.debugElement.query(By.directive(NgxPrintDirective));
 
     fixture.detectChanges();
   });
@@ -77,39 +78,49 @@ describe('NgxPrintDirective', () => {
     expect(directive).toBeTruthy();
   });
 
-  // it('should test the @Input printStyle', () => {
-  //   const directive = new NgxPrintDirective();
-  //   directive.printStyle = styleSheet;
-  //   for (var key in directive.printStyle) {
-  //     if (directive.printStyle.hasOwnProperty(key)) {
-  //       directive._printStyle.push((key + JSON.stringify(directive.printStyle[key])).replace(/['"]+/g, ''));
-  //     }
-  //   }
-  //   directive.returnStyleValues();
+  it('should test the @Input printStyle', () => {
+    const directive = new NgxPrintDirective();
 
-  //   expect(directive.returnStyleValues).toHaveBeenCalled();
-  // });
+    // Define styleSheet before using it
 
-  // it('should returns a string from array of objects', () => {
-  //   const directive = new NgxPrintDirective();
-  //   directive._printStyle = [
-  //     "h2{border:solid 1px}",
-  //     "h1{color:red,border:1px solid}"
-  //   ];
-  //   // let returnedString = directive.returnStyleValues();
+    directive.printStyle = styleSheet;
 
-  //   // immediately invoked arrow function, else you can uncomment `returnedString` and use it instead
-  //   expect((() => {return directive.returnStyleValues()})()).toEqual('h2{border:solid 1px} h1{color:red,border:1px solid}');
-  // });
+    // Iterate through printStyle and push values to _printStyle
+    for (const key in directive.printStyle) {
+      if (directive.printStyle.hasOwnProperty(key)) {
+        directive._printStyle.push((key + JSON.stringify(directive.printStyle[key])).replace(/['"]+/g, ''));
+      }
+    }
 
-  it(`should popup a new window`, ()=> {
+    // Create a spy on the instance's method
+    spyOn(directive, 'returnStyleValues').and.callThrough();
+
+    // Call the function before checking if it has been called
+    directive.returnStyleValues();
+
+    // Check if returnStyleValues has been called
+    expect(directive.returnStyleValues).toHaveBeenCalled();
+  });
+
+
+  it('should returns a string from array of objects', () => {
+    const directive = new NgxPrintDirective();
+    directive._printStyle = [
+      "h2{border:solid 1px}",
+      "h1{color:red,border:1px solid}"
+    ];
+
+    expect((() => { return directive.returnStyleValues() })()).toEqual('<style> h2{border:solid 1px} h1{color:red;border:1px solid} </style>');
+  });
+
+  it(`should popup a new window`, () => {
     spyOn(window, 'open').and.callThrough();
     // simulate click
     buttonEl.triggerEventHandler('click', {});
     expect(window.open).toHaveBeenCalled();
   });
 
-  it(`should apply class list to body element in new window`, ()=> {
+  it(`should apply class list to body element in new window`, () => {
     const windowOpenSpy = spyOn(window, 'open').and.callThrough();
     // simulate click
     buttonEl.triggerEventHandler('click', {});
