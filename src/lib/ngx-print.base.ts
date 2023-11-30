@@ -192,12 +192,12 @@ export class PrintBase {
               <script defer>
                 function triggerPrint(event) {
                   window.removeEventListener('load', triggerPrint, false);
-                  ${printOptions.previewOnly || !printOptions.closeWindow ? '' : `setTimeout(function() {
+                  ${printOptions.previewOnly ? '' : `setTimeout(function() {
                     closeWindow(window.print());
                   }, ${printOptions.printDelay});`}
                 }
                 function closeWindow(){
-                  window.close();
+                  ${printOptions.closeWindow ? 'window.close();' : ''}
                 }
                 window.addEventListener('load', triggerPrint, false);
               </script>
