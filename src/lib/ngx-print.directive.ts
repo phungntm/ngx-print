@@ -214,12 +214,12 @@ export class NgxPrintDirective {
           <script defer>
             function triggerPrint(event) {
               window.removeEventListener('load', triggerPrint, false);
-              ${this.previewOnly || !this.closeWindow ? '' : `setTimeout(function() {
+              ${this.previewOnly ? '' : `setTimeout(function() {
                 closeWindow(window.print());
               }, ${this.printDelay});`}
             }
             function closeWindow(){
-              window.close();
+              ${this.closeWindow ? 'window.close();' : ''}
             }
             window.addEventListener('load', triggerPrint, false);
           </script>
