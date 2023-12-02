@@ -23,7 +23,7 @@ import { NgxPrintDirective } from './ngx-print.directive';
         <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
       </li>
     </ul>
-    <table border = "1">
+    <table border="1">
       <tr>
         <td>Row 1, Column 1</td>
         <td>Row 1, Column 2</td>
@@ -81,18 +81,6 @@ describe('NgxPrintDirective', () => {
   it('should test the @Input printStyle', () => {
     const directive = new NgxPrintDirective();
 
-    // Define styleSheet before using it
-    const styleSheet = {/* Define your styles here */ };
-
-    directive.printStyle = styleSheet;
-
-    // Iterate through printStyle and push values to _printStyle
-    for (const key in directive.printStyle) {
-      if (directive.printStyle.hasOwnProperty(key)) {
-        directive._printStyle.push((key + JSON.stringify(directive.printStyle[key])).replace(/['"]+/g, ''));
-      }
-    }
-
     // Create a spy on the instance's method
     spyOn(directive, 'returnStyleValues').and.callThrough();
 
@@ -106,12 +94,10 @@ describe('NgxPrintDirective', () => {
 
   it('should returns a string from array of objects', () => {
     const directive = new NgxPrintDirective();
-    directive._printStyle = [
-      "h2{border:solid 1px}",
-      "h1{color:red,border:1px solid}"
-    ];
+    directive.printStyle = styleSheet;
 
-    expect((() => { return directive.returnStyleValues() })()).toEqual('<style> h2{border:solid 1px} h1{color:red;border:1px solid} </style>');
+    // Ensure the print styles are correctly formatted in the document
+    expect(directive.returnStyleValues()).toEqual('<style> h2{border:solid 1px} h1{color:red;border:1px solid} </style>');
   });
 
   it(`should popup a new window`, () => {
