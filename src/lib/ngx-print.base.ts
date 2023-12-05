@@ -113,6 +113,32 @@ export class PrintBase {
     }
 
     /**
+     * Converts a canvas element to an image and returns its HTML string.
+     *
+     * @param {HTMLCanvasElement} element - The canvas element to convert.
+     * @returns {string} - HTML string of the image.
+     * @private
+     */
+    private canvasToImageHtml(element: HTMLCanvasElement): string {
+        const dataUrl = element.toDataURL();
+        return `<img src="${dataUrl}" style="max-width: 100%;">`;
+    }
+
+    /**
+     * Includes canvas contents in the print section via img tags.
+     *
+     * @param {HTMLCollectionOf<HTMLCanvasElement>} elements - Collection of canvas elements.
+     * @private
+     */
+    private updateCanvasToImage(elements: HTMLCollectionOf<HTMLCanvasElement>): void {
+        for (let i = 0; i < elements.length; i++) {
+            const element = this.canvasToImageHtml(elements[i]);
+            elements[i].insertAdjacentHTML('afterend', element);
+            elements[i].remove();
+        }
+    }
+
+    /**
      * Retrieves the HTML content of a specified printing section.
      *
      * @param {string} printSectionId - Id of the printing section.
@@ -126,10 +152,12 @@ export class PrintBase {
         const inputEls = printContents.getElementsByTagName('input');
         const selectEls = printContents.getElementsByTagName('select');
         const textAreaEls = printContents.getElementsByTagName('textarea');
+        const canvasEls = printContents.getElementsByTagName('canvas');
 
         this.updateInputDefaults(inputEls);
         this.updateSelectDefaults(selectEls);
         this.updateTextAreaDefaults(textAreaEls);
+        this.updateCanvasToImage(canvasEls);
 
         return printContents.innerHTML;
     }
