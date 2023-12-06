@@ -188,12 +188,18 @@ export class PrintBase {
      */
     protected print(printOptions: PrintOptions): void {
 
-        let styles = '', links = '';
+        let styles = '', links = '', popOut = 'top=0,left=0,height=auto,width=auto';
         const baseTag = this.getElementTag('base');
 
         if (printOptions.useExistingCss) {
             styles = this.getElementTag('style');
             links = this.getElementTag('link');
+        }
+
+        // If the openNewTab option is set to true, then set the popOut option to an empty string. 
+        // This will cause the print dialog to open in a new tab.
+        if (printOptions.openNewTab) {
+            popOut = '';
         }
 
         const printContents = this.getHtmlContents(printOptions.printSectionId);
@@ -203,7 +209,14 @@ export class PrintBase {
             return;
         }
 
-        const popupWin = window.open("", "_blank", "top=0,left=0,height=auto,width=auto");
+        const popupWin = window.open("", "_blank", popOut);
+
+        if (!popupWin) {
+            // the popup window could not be opened.
+            console.error('Could not open print window.');
+            return;
+        }
+
         popupWin.document.open();
         popupWin.document.write(`
           <html>
