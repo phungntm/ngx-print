@@ -69,6 +69,14 @@ export class NgxPrintDirective extends PrintBase {
   }
 
   /**
+   * Whether to open a new window or default to new window.
+   *
+   */
+  @Input() set openNewTab(value: boolean) {
+    this.printOptions = { ...this.printOptions, openNewTab: value };
+  }
+
+  /**
    *
    *
    * @memberof NgxPrintDirective

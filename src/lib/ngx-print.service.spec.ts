@@ -148,6 +148,19 @@ describe('NgxPrintService', () => {
     expect(service.print).toHaveBeenCalledWith(customPrintOptions);
   });
 
+  it('should open new tab', () => {
+    spyOn(service, 'print');
+
+    const customPrintOptions: PrintOptions = new PrintOptions({
+      printSectionId: 'print-section',
+      openNewTab: true
+    });
+
+    component.printMe(customPrintOptions);
+
+    expect(service.print).toHaveBeenCalledWith(customPrintOptions);
+  });
+
   it('should test the printStyle', () => {
 
     // Create a spy on the instance's method

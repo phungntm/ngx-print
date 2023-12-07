@@ -3,6 +3,7 @@ export class PrintOptions {
   printTitle: string = null;
   useExistingCss: boolean = false;
   bodyClass: string = '';
+  openNewTab: boolean = false;
   previewOnly: boolean = false;
   closeWindow: boolean = true;
   printDelay: number = 0;
