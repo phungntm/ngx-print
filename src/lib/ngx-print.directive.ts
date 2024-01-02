@@ -31,7 +31,7 @@ export class NgxPrintDirective extends PrintBase {
    * @memberof NgxPrintDirective
    */
   @Input() set printTitle(value: string) {
-    this.printOptions = { ...this.printOptions, printSectionId: value };
+    this.printOptions = { ...this.printOptions, printTitle: value };
   }
 
   /**
