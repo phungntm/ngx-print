@@ -187,7 +187,16 @@ Here some simple styles were added to every `h1` & `h2` tags within the `div` wh
 	ngxPrint>print</button>
 
 ```
-## Using NgxPrint as a service
+
+- To print in a new tab rather than a new window set the property  `openNewTab` to true. By default `openNewTab` is false and ngxPrint will open a new print window.
+
+```html
+<button
+	[openNewTab]="true"
+	ngxPrint>print</button>
+```
+
+## Using NgxPrint as a service (v1.5+)
 Inject the NgxPrintService in the constructor of your component or service:
 
 ```typescript
@@ -214,6 +223,7 @@ The print options object allows you to specify how the print job should be handl
   printTitle: string = null;
   useExistingCss: boolean = false;
   bodyClass: string = '';
+  openNewTab: boolean = false;
   previewOnly: boolean = false;
   closeWindow: boolean = true;
   printDelay: number = 0;
