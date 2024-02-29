@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { CSP_NONCE, Inject, Injectable, Optional } from "@angular/core";
 import { PrintOptions } from "./print-options";
 
 @Injectable({
@@ -8,6 +8,8 @@ export class PrintBase {
 
     private _printStyle: string[] = [];
     private _styleSheetFile: string = '';
+
+  constructor(@Inject(CSP_NONCE) @Optional() private nonce?: string | null) {}
 
     //#region Getters and Setters
     /**
@@ -34,7 +36,8 @@ export class PrintBase {
      * -join/replace to transform an array objects to css-styled string
      */
     public returnStyleValues() {
-        return `<style> ${this._printStyle.join(' ').replace(/,/g, ';')} </style>`;
+      const styleNonce = this.nonce ? ` nonce="${this.nonce}"` : '';
+        return `<style${styleNonce}> ${this._printStyle.join(' ').replace(/,/g, ';')} </style>`;
     }
 
     /**
@@ -196,7 +199,7 @@ export class PrintBase {
             links = this.getElementTag('link');
         }
 
-        // If the openNewTab option is set to true, then set the popOut option to an empty string. 
+        // If the openNewTab option is set to true, then set the popOut option to an empty string.
         // This will cause the print dialog to open in a new tab.
         if (printOptions.openNewTab) {
             popOut = '';

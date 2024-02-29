@@ -1,8 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgxPrintService } from './ngx-print.service';
-import { Component } from '@angular/core';
+import { Component, CSP_NONCE } from '@angular/core';
 import { PrintOptions } from './print-options';
+
+const testNonce = 'dummy-nonce-value';
+
 @Component({
   template: `
   <div id="print-section">
@@ -57,7 +60,7 @@ describe('NgxPrintService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestNgxPrintServiceComponent],
-      providers: [NgxPrintService]
+      providers: [{ provide: CSP_NONCE, useValue: testNonce }, NgxPrintService]
     });
     service = TestBed.inject(NgxPrintService);
     // Create a fixture object (that is going to allows us to create an instance of that component)
@@ -178,6 +181,6 @@ describe('NgxPrintService', () => {
     service.printStyle = styleSheet;
 
     // Ensure the print styles are correctly formatted in the document
-    expect(service.returnStyleValues()).toEqual('<style> h2{border:solid 1px} h1{color:red;border:1px solid} </style>');
+    expect(service.returnStyleValues()).toEqual('<style nonce="' + testNonce + '"> h2{border:solid 1px} h1{color:red;border:1px solid} </style>');
   });
 });
