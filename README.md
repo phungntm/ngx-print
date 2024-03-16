@@ -238,6 +238,9 @@ this.printService.printStyle = styleSheet;
 this.printService.styleSheetFile = fileLocation;
 ```
 
+## Content-Security-Policy (CSP) Support
+If Angular is configured to use a [CSP Nonce](https://angular.io/api/core/CSP_NONCE), ngx-print will automatically inject the `[printStyle]` CSS rules with this Nonce authorization.
+
 ## Contributors :1st_place_medal: 
 
 Huge thanks to: [deeplotia](https://github.com/deeplotia) , [Ben L](https://github.com/broem) , [Gavyn McKenzie](https://github.com/gavmck) , [silenceway](https://github.com/silenceway), [Muhammad Ahsan Ayaz](https://github.com/AhsanAyaz), [Core121](https://github.com/Core121) and to all  `ngx-print` users 
